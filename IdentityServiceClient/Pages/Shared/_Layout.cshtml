@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - IdentityServiceClient</title>
+    <title>@ViewData["Title"] - Identity Service Client</title>
 
     <script src="~/js/fa-5.7.1.js"></script>
 
@@ -11,6 +11,7 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/sidenav.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
@@ -18,17 +19,41 @@
 
 </head>
 <body>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <!--Branding-->
+            <li class="sidebar-branding">
+                <a href="~/"><img src="~/images/menu/branding.png" /></a>
+            </li>
+            <!--Menu-->
+            <li>
+                <a id="dashboard-nav" class="active" href="~/dashboard">
+                    <i class="fas fa-tachometer-alt fa-2x"></i>
+                    <div>Dashboard</div>
+                </a>
+            </li>
+            <li>
+                <a id="profile-nav" href="~/profile">
+                    <i class="fas fa-user-circle fa-2x"></i>
+                    <div>Profile</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div id="page-content-wrapper">
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2019 - IdentityServiceClient - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            </div>
+        </footer>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - IdentityServiceClient - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
