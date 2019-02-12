@@ -1,22 +1,11 @@
-﻿body {
-    /*margin-top:20px;
-     Margin bottom by footer height 
-    margin-bottom: 60px;*/
-}
-
-/* Sticky footer styles
--------------------------------------------------- 
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    white-space: nowrap;
-    /* Set the fixed height of the footer here * /
+﻿.footer {
     height: 60px;
-    line-height: 58px; /* Vertically center the text there * /
-}*/
+    padding-left: 20px;
+    line-height: 58px; /* Vertically center footer text */
+}
+.footer-mobile {
+    margin-top:40px;
+    height: 50px;
+    padding-left: 15px;
+    line-height: 48px; /* Vertically center footer text */
+}

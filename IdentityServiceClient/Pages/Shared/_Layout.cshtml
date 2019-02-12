@@ -19,41 +19,52 @@
 
 </head>
 <body>
-    <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <!--Branding-->
-            <li class="sidebar-branding">
-                <a href="~/"><img src="~/images/menu/branding.png" /></a>
-            </li>
-            <!--Menu-->
-            <li>
-                <a id="dashboard-nav" class="active" href="~/dashboard">
-                    <i class="fas fa-tachometer-alt fa-2x"></i>
-                    <div>Dashboard</div>
-                </a>
-            </li>
-            <li>
-                <a id="profile-nav" href="~/profile">
-                    <i class="fas fa-user-circle fa-2x"></i>
-                    <div>Profile</div>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div id="page-content-wrapper">
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
+    <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <!--Branding-->
+                <li class="sidebar-branding">
+                    <a href="~/"><img src="~/images/menu/branding.png" /></a>
+                </li>
+                <!--Menu-->
+                <li>
+                    <a id="dashboard-nav" class="active" href="~/dashboard">
+                        <i class="fas fa-tachometer-alt fa-2x"></i>
+                        <div>Dashboard</div>
+                    </a>
+                </li>
+                <li>
+                    <a id="profile-nav" href="~/profile">
+                        <i class="fas fa-user-circle fa-2x"></i>
+                        <div>Profile</div>
+                    </a>
+                </li>
+            </ul>
         </div>
 
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2019 - IdentityServiceClient - <a asp-area="" asp-page="/Privacy">Privacy</a>
-            </div>
-        </footer>
-    </div>
+        <!-- Menu Toggle -->
+        <div id="menu-toggle" style="background-color:#282828; width:100%; padding:12px;">
+            <a href="#" style="color:lightgray">
+                <i class="fas fa-bars fa-2x"></i>
+            </a>
+        </div>
 
+        <!-- Main Content -->
+        <div id="page-content-wrapper">
+            <div class="container">
+                @RenderBody()
+            </div>
+
+            <!-- Footer Desktop-->
+            <footer class="d-none d-sm-block border-top footer text-muted fixed-bottom">
+                &copy; 2019 - Identity Service Client
+            </footer>
+            <!-- Footer Mobile -->
+            <div class="d-sm-none border-top text-muted footer-mobile">
+                &copy; 2019 - Identity Service Client
+            </div>
+        </div>
+    </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -66,5 +77,14 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+
+    <!-- JavaScript for the Menu Toggle -->
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("active");
+        });
+    </script>
+
 </body>
 </html>
