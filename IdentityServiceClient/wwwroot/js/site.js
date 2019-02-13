@@ -1,4 +1,23 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿// Shared _Layout.cshtml -------------
 
-// Write your Javascript code.
+// Mobile Menu Toggle
+$("#menu-toggle").click(function (e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("active");
+});
+
+// Determine which menu item should be set to 'Active' based on URL
+$(function () {
+
+    var rootPath = location.pathname.split('/')[1];
+    rootPath = rootPath.toLowerCase();
+    activeMenuItem = "";
+    if (rootPath == "") {
+        activeMenuItem = "dashboard";
+    }
+    else {
+        activeMenuItem = rootPath;
+    }
+
+    $("#" + activeMenuItem + "-nav").addClass('active');
+});

@@ -6,7 +6,6 @@
     <title>@ViewData["Title"] - Identity Service Client</title>
 
     <script src="~/js/fa-5.7.1.js"></script>
-
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
     <environment include="Development">
@@ -19,7 +18,9 @@
 
 </head>
 <body>
+
     <div id="wrapper">
+
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <!--Branding-->
@@ -28,7 +29,7 @@
                 </li>
                 <!--Menu-->
                 <li>
-                    <a id="dashboard-nav" class="active" href="~/dashboard">
+                    <a id="dashboard-nav" href="~/dashboard">
                         <i class="fas fa-tachometer-alt fa-2x"></i>
                         <div>Dashboard</div>
                     </a>
@@ -77,14 +78,6 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
-
-    <!-- JavaScript for the Menu Toggle -->
-    <script>
-        $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("active");
-        });
-    </script>
 
 </body>
 </html>
