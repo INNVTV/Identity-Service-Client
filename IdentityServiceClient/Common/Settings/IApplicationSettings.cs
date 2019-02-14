@@ -14,6 +14,8 @@ namespace IdentityServiceClient.Common.Settings
         EndpointSettings Endpoints { get; set; }
         HostingConfiguration Hosting { get; set; }
 
+        IdentityService IdentityService { get; set; }
+
     }
 
     #region Classes
@@ -61,6 +63,18 @@ namespace IdentityServiceClient.Common.Settings
     {
         public string Domain { get; set; }
     }
+
+    #endregion
+
+    #region Services
+
+    public class IdentityService
+    {
+        public string ApiUrl { get; set; }
+        public string ApiKey { get; set; }
+        public string ForgotPasswordUrl { get; set; }
+    }
+
 
     #endregion
 
