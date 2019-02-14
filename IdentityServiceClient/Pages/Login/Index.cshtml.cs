@@ -73,6 +73,10 @@ namespace IdentityServiceClient.Pages.Login
                 // We use a passphrase that is only known to the server to encrypt and decrypt ALL user reresh tokens
                 // In a desktop/native app they should be stored encrypted until ready for use.
 
+                var str = Common.Encryption.StringEncryption.EncryptString(
+                      result.RefreshToken, _applicationSettings.JSONWebTokens.RefreshTokenEncryptionPassPhrase
+                      );
+
                 Response.Cookies.Append(
                   refreshTokenCookieName,
                   // Encrypted Token
@@ -88,7 +92,15 @@ namespace IdentityServiceClient.Pages.Login
                       SameSite = SameSiteMode.Strict
                   });
 
-                return Redirect(Request.Query["returnUrl"]);
+                if(!String.IsNullOrEmpty(Request.Query["returnUrl"]))
+                {
+                    return Redirect(Request.Query["returnUrl"]);
+                }
+                else
+                {
+                    return Redirect("/");
+                }
+                
             } 
         }
     }

@@ -40,6 +40,7 @@ namespace IdentityServiceClient.Common.Encryption
         //Decrypt
         public static string DecryptString(string cipherText, string passPhrase)
         {
+
             byte[] initVectorBytes = Encoding.UTF8.GetBytes(initVector);
             byte[] cipherTextBytes = Convert.FromBase64String(cipherText);
             PasswordDeriveBytes password = new PasswordDeriveBytes(passPhrase, null);
