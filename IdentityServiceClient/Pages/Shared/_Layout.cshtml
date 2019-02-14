@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject Common.Settings.IApplicationSettings applicationSettings
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,7 +7,6 @@
     <title>@ViewData["Title"] - Identity Service Client</title>
 
     <script src="~/js/fa-5.7.1.js"></script>
-
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
     <environment include="Development">
@@ -19,7 +19,9 @@
 
 </head>
 <body>
+
     <div id="wrapper">
+
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <!--Branding-->
@@ -28,7 +30,7 @@
                 </li>
                 <!--Menu-->
                 <li>
-                    <a id="dashboard-nav" class="active" href="~/dashboard">
+                    <a id="dashboard-nav" href="~/dashboard">
                         <i class="fas fa-tachometer-alt fa-2x"></i>
                         <div>Dashboard</div>
                     </a>
@@ -57,11 +59,11 @@
 
             <!-- Footer Desktop-->
             <footer class="d-none d-sm-block border-top footer text-muted fixed-bottom">
-                &copy; 2019 - Identity Service Client
+                &copy; @DateTime.Now.Year - @applicationSettings.Application.Name
             </footer>
             <!-- Footer Mobile -->
             <div class="d-sm-none border-top text-muted footer-mobile">
-                &copy; 2019 - Identity Service Client
+                &copy; @DateTime.Now.Year - @applicationSettings.Application.Name
             </div>
         </div>
     </div>
@@ -77,14 +79,6 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
-
-    <!-- JavaScript for the Menu Toggle -->
-    <script>
-        $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("active");
-        });
-    </script>
 
 </body>
 </html>
