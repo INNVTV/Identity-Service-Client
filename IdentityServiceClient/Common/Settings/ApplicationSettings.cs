@@ -20,7 +20,7 @@ namespace IdentityServiceClient.Common.Settings
             Hosting = new HostingConfiguration();
             JSONWebTokens = new JWTConfiguration();
             Endpoints = new EndpointSettings();
-
+            IdentityService = new IdentityService();
 
             // Map appsettings.json
             Application.Name = configuration.GetSection("Application").GetSection("Name").Value;
@@ -35,6 +35,10 @@ namespace IdentityServiceClient.Common.Settings
             JSONWebTokens.PublicKeyXmlString = configuration.GetSection("JWT").GetSection("PublicKeyXmlString").Value;
 
             Endpoints.Domain = configuration.GetSection("Endpoints").GetSection("Domain").Value;
+
+            IdentityService.ApiUrl = configuration.GetSection("IdentityService").GetSection("ApiUrl").Value;
+            IdentityService.ApiKey = configuration.GetSection("IdentityService").GetSection("ApiKey").Value;
+            IdentityService.ForgotPasswordUrl = configuration.GetSection("IdentityService").GetSection("ForgotPasswordUrl").Value;
 
             #region Hosting configuration details (if available)
 
@@ -59,5 +63,6 @@ namespace IdentityServiceClient.Common.Settings
         public JWTConfiguration JSONWebTokens { get; set; }
         public Cookies Cookies { get; set; }
         public EndpointSettings Endpoints { get; set; }
+        public IdentityService IdentityService { get; set; }
     }
 }

@@ -33,9 +33,9 @@ namespace IdentityServiceClient.Pages.Login
         {
             using (var httpClient = new System.Net.Http.HttpClient())
             {
-                httpClient.DefaultRequestHeaders.Add("X-API-KEY", "X-API-KEY-1");
+                httpClient.DefaultRequestHeaders.Add("X-API-KEY", _applicationSettings.IdentityService.ApiKey);
 
-                var authenticatonClient = new Services.IdentityService.AuthenticationClient("https://platform-identity-service-stage.azurewebsites.net", httpClient);
+                var authenticatonClient = new Services.IdentityService.AuthenticationClient(_applicationSettings.IdentityService.ApiUrl, httpClient);
                 var result = await authenticatonClient.UserAsync(AuthenticateUser);
 
                 if (!result.IsSuccess.Value)
@@ -73,13 +73,11 @@ namespace IdentityServiceClient.Pages.Login
                 // We use a passphrase that is only known to the server to encrypt and decrypt ALL user reresh tokens
                 // In a desktop/native app they should be stored encrypted until ready for use.
 
-                var str = Common.Encryption.StringEncryption.EncryptString(
-                      result.RefreshToken, _applicationSettings.JSONWebTokens.RefreshTokenEncryptionPassPhrase
-                      );
 
                 Response.Cookies.Append(
                   refreshTokenCookieName,
                   // Encrypted Token
+                  // Note: You will need to use: System.Web.HttpUtility.UrlDecode(strToDecode) when reading back in
                   Common.Encryption.StringEncryption.EncryptString(
                       result.RefreshToken, _applicationSettings.JSONWebTokens.RefreshTokenEncryptionPassPhrase
                       ),
