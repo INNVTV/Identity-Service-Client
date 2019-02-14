@@ -74,7 +74,7 @@ namespace IdentityServiceClient.Middleware.Authentication
                     if (!String.IsNullOrEmpty(refreshToken))
                     {
                         // UrlDecode the cookie value
-                        refreshToken = System.Web.HttpUtility.UrlDecode(refreshToken);
+                        refreshToken = System.Web.HttpUtility.HtmlDecode(refreshToken);
 
                         // Decrypt the encrypted refresh token value
                         refreshToken = Common.Encryption.StringEncryption.DecryptString(refreshToken, _refreshTokenEncryptionPassPhrase);
@@ -136,7 +136,7 @@ namespace IdentityServiceClient.Middleware.Authentication
                 // Redirect or pass on based on results -------------
                 if (!validToken)
                 {
-                    context.Response.Redirect("/Login");
+                    context.Response.Redirect("/login");
                 }
                 else
                 {

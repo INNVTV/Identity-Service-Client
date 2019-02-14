@@ -1,11 +1,12 @@
 ﻿@page
+@inject Common.Settings.IApplicationSettings applicationSettings
 @model IdentityServiceClient.Pages.Login.IndexModel
 @{
     Layout = "_Public";
     ViewData["Title"] = "Login";
 }
 
-<div class="form-group col-xl-4 offset-xl-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-12">
+<div class="form-group col-xl-4 offset-xl-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-12" style="margin-top:10%">
 
     <h2>Sign In</h2>
 
@@ -27,11 +28,11 @@
         </div>
 
         <div class="form-group">
-            <button class="btn btn-primary btn-block btn-lg">Sign In</button>
+            <button class="btn btn-dark btn-block btn-lg">Sign In</button>
         </div>
 
         <div class="form-group">
-            <a href="~/Password/Forgot">Forgot your password?</a>
+            <a href="@applicationSettings.IdentityService.ForgotPasswordUrl" style="color:darkgrey">Forgot your password?</a>
             <br />
             <!-- Link to register or request an account. Can be it's own service.
             <a href="">Request an account</a>
