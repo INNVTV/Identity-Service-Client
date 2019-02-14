@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace IdentityServiceClient.Pages
+namespace IdentityServiceClient.Pages.Profile
 {
     public class IndexModel : PageModel
     {
-        public IActionResult OnGet()
+        public void OnGet()
         {
-            return Redirect("/dashboard");
+
         }
     }
 }

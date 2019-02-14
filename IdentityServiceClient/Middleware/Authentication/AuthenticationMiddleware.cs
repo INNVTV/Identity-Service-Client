@@ -136,7 +136,7 @@ namespace IdentityServiceClient.Middleware.Authentication
                 // Redirect or pass on based on results -------------
                 if (!validToken)
                 {
-                    context.Response.Redirect("/Login");
+                    context.Response.Redirect("/login");
                 }
                 else
                 {

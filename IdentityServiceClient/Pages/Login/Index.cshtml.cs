@@ -96,7 +96,7 @@ namespace IdentityServiceClient.Pages.Login
                 }
                 else
                 {
-                    return Redirect("/");
+                    return Redirect("/dashboard");
                 }
                 
             } 

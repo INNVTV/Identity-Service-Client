@@ -1,0 +1,16 @@
+﻿@page
+@model IdentityServiceClient.Pages.Profile.IndexModel
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div>
+    <h1 class="display-4">Profile</h1>
+    <p>@User.Identity.Name</p>
+    @if(User.IsInRole("Admin"))
+    {
+        <p>Is Admin</p>
+    }
+    <a class="btn btn-outline-dark" href="~/signout"><i class="fas fa-sign-out-alt"></i> Signout</a>
+</div>
+
