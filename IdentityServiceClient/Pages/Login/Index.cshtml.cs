@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IdentityServiceClient.Common.Settings;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,9 +15,12 @@ namespace IdentityServiceClient.Pages.Login
         [BindProperty]
         public AuthenticateUserCommand AuthenticateUser { get; set; }
 
-        public IndexModel()
-        {
 
+        readonly IApplicationSettings _applicationSettings;
+
+        public IndexModel(IServiceProvider serviceProvider, IApplicationSettings applicationSettings)
+        {
+            _applicationSettings = applicationSettings;
         }
 
         public void OnGet()
@@ -46,15 +50,21 @@ namespace IdentityServiceClient.Pages.Login
                 // This will require building out your own version of the login UI in your web or mobile app
                 // You can still use the password reset, invitiation acceptance, and other UIs in this web app.
 
+                var jwtCookieName = _applicationSettings.Cookies.JwtCookieName;
+                var refreshTokenCookieName = _applicationSettings.Cookies.RefreshTokenCookieName;
+
+                Response.Cookies.Delete(jwtCookieName);
+                Response.Cookies.Delete(refreshTokenCookieName);
+
                 Response.Cookies.Append(
-                  "jwtToken",
+                  jwtCookieName,
                   result.JwtToken,
                   new CookieOptions()
                   {
                       IsEssential = true,
                       HttpOnly = true,
                       Secure = true,
-                      Expires = DateTime.UtcNow.AddHours(_coreConfiguration.JSONWebTokens.CookieExpirationHours),
+                      Expires = DateTime.UtcNow.AddHours(_applicationSettings.Cookies.CookieExpirationHours),
                       SameSite = SameSiteMode.Strict
                   });
 
@@ -64,17 +74,17 @@ namespace IdentityServiceClient.Pages.Login
                 // In a desktop/native app they should be stored encrypted until ready for use.
 
                 Response.Cookies.Append(
-                  "refreshToken",
+                  refreshTokenCookieName,
                   // Encrypted Token
-                  Core.Common.Encryption.StringEncryption.EncryptString(
-                      result.RefreshToken, _coreConfiguration.JSONWebTokens.RefreshTokenEncryptionPassPhrase
+                  Common.Encryption.StringEncryption.EncryptString(
+                      result.RefreshToken, _applicationSettings.JSONWebTokens.RefreshTokenEncryptionPassPhrase
                       ),
                   new CookieOptions()
                   {
                       IsEssential = true,
                       HttpOnly = true,
                       Secure = true,
-                      Expires = DateTime.UtcNow.AddHours(_coreConfiguration.JSONWebTokens.CookieExpirationHours),
+                      Expires = DateTime.UtcNow.AddHours(_applicationSettings.Cookies.CookieExpirationHours),
                       SameSite = SameSiteMode.Strict
                   });
 
