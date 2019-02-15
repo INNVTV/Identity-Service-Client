@@ -6,6 +6,7 @@ using IdentityServiceClient.Common.Settings;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Serilog;
 using Services.IdentityService;
 
 namespace IdentityServiceClient.Pages.Login
@@ -33,7 +34,7 @@ namespace IdentityServiceClient.Pages.Login
         {
             using (var httpClient = new System.Net.Http.HttpClient())
             {
-                httpClient.DefaultRequestHeaders.Add("X-API-KEY", _applicationSettings.IdentityService.ApiKey);
+                httpClient.DefaultRequestHeaders.Add(_applicationSettings.IdentityService.ApiKeyName, _applicationSettings.IdentityService.ApiKeyValue);
 
                 var authenticatonClient = new Services.IdentityService.AuthenticationClient(_applicationSettings.IdentityService.ApiUrl, httpClient);
                 var result = await authenticatonClient.UserAsync(AuthenticateUser);
@@ -73,6 +74,8 @@ namespace IdentityServiceClient.Pages.Login
                 // We use a passphrase that is only known to the server to encrypt and decrypt ALL user reresh tokens
                 // In a desktop/native app they should be stored encrypted until ready for use.
 
+
+                //Log.Information("Claims stored in JWT. Current refresh token is: {token}", result.RefreshToken);
 
                 Response.Cookies.Append(
                   refreshTokenCookieName,

@@ -57,15 +57,14 @@ namespace IdentityServiceClient.Middleware.Authentication.Helpers
                 {
                     claimsPrincipal = handler.ValidateToken(tokenString, tokenValidationParameters, out validatedToken);
                 }
-                catch (SecurityTokenExpiredException)
+                catch (SecurityTokenExpiredException ex)
                 {
                     return new DecodeAndValidateJwtTokenResults { isValid = false, isExpired = true };
                 }
-                catch (SecurityTokenException)
+                catch (SecurityTokenException ex)
                 {
                     return new DecodeAndValidateJwtTokenResults { isValid = false };
-                }
-                
+                }               
                 catch (Exception ex)
                 {
                     //Log.Critical(ex.ToString()); // Something else happened!
@@ -73,7 +72,6 @@ namespace IdentityServiceClient.Middleware.Authentication.Helpers
                     return new DecodeAndValidateJwtTokenResults { isValid = false };
                 }
 
-                
                 return new DecodeAndValidateJwtTokenResults {
                     isValid = true,
                     ClaimsPrincipal = claimsPrincipal,

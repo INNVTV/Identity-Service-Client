@@ -1,11 +1,16 @@
 ﻿.footer {
+    margin-top:40px;
+    margin-left:10px;
+    margin-right:10px;
     height: 60px;
     padding-left: 20px;
     line-height: 58px; /* Vertically center footer text */
 }
-.footer-mobile {
-    margin-top:40px;
-    height: 50px;
-    padding-left: 15px;
-    line-height: 48px;  /*Vertically center footer text*/
-} 
+
+.icon-btn {
+    color: darkgray !important;
+    margin-left: 3px !important;
+}
+.icon-btn:hover {
+    color: black !important;
+}
