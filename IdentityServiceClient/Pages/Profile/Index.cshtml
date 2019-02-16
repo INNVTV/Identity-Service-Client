@@ -4,13 +4,45 @@
     ViewData["Title"] = "Profile";
 }
 
-<div>
+<div class="col-xl-6 col-lg-6 col-md-6">
     <h1 class="display-4">Profile</h1>
-    <p>@User.Identity.Name</p>
-    @if(User.IsInRole("Admin"))
+    <div><b>Username: </b>@User.FindFirst("userName").Value <a class="icon-btn" href="~/profile/edit/username"><i class="fas fa-pencil-alt"></i></a></div>
+    <div><b>Email: </b>@User.FindFirst("emailAddress").Value <a class="icon-btn" href="~/profile/edit/email"><i class="fas fa-pencil-alt"></i></a></div>
+    <div><b>Name: </b>@User.FindFirst("fullName").Value <a class="icon-btn" href="~/profile/edit/name"><i class="fas fa-pencil-alt"></i></a></div>
+    <div><b>Id: </b>@User.FindFirst("id").Value</div>
+    <hr />
+    <div>
+        <a class="btn btn-sm btn-outline-dark" href="~/profile/edit/password"><i class="fas fa-key"></i> Change Password</a>
+        <a class="btn btn-sm btn-outline-dark" href="~/signout"><i class="fas fa-sign-out-alt"></i> Signout</a>
+    </div>
+    <hr />
+    <h4 class="display-4">Roles</h4>
+    @if (User.IsInRole("Owner"))
     {
-        <p>Is Admin</p>
+        <p><i class="fas fa-check-circle"></i>Is Owner</p>
     }
-    <a class="btn btn-outline-dark" href="~/signout"><i class="fas fa-sign-out-alt"></i> Signout</a>
+    @if (User.IsInRole("Admin"))
+    {
+        <p><i class="fas fa-check-circle"></i> Is Admin</p>
+    }
+    @if (User.IsInRole("User"))
+    {
+        <p><i class="fas fa-check-circle"></i> Is User</p>
+    }
+    @if (User.IsInRole("Manager"))
+    {
+        <p><i class="fas fa-check-circle"></i> Is Manager</p>
+    }
+    <hr />
+    <h4 class="display-4">Claims</h4>
+    @foreach (var claim in User.Claims)
+    {
+        <div>
+            <small><i class="fas fa-ticket-alt"></i> <b>@claim.Type:</b></small>
+            <small>@claim.Value</small>
+        </div>
+    }
+
+
 </div>
 

@@ -1,10 +1,11 @@
-﻿.footer {
-    margin-left: 130px;
-}
-
-#page-content-wrapper {
+﻿#page-content-wrapper {
     width: 100%;
     padding-top: 20px;
+}
+
+#main-content {
+    margin-left: 2%;
+    margin-right: 2%;
 }
 
 #wrapper {
@@ -75,25 +76,6 @@
     color: none;
     background: none;
 }
-/*
-.content-header {
-    height: 65px;
-    line-height: 65px;
-}
-
-.content-header h1 {
-    margin: 0;
-    margin-left: 20px;
-    line-height: 65px;
-    display: inline-block;
-}
-
-
-
-.inset {
-    padding: 20px;
-}*/
-
 
 /* Mobile Side Menu ------------------------------------------*/
 
@@ -126,8 +108,4 @@
         display: inline-block;
     }
 
-    /*
-    .inset {
-        padding: 15px;
-    }*/
 }

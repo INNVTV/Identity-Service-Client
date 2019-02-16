@@ -71,8 +71,8 @@ namespace IdentityServiceClient.Common.Settings
     public class IdentityService
     {
         public string ApiUrl { get; set; }
-        public string ApiKey { get; set; }
-        public string ForgotPasswordUrl { get; set; }
+        public string ApiKeyName { get; set; }
+        public string ApiKeyValue { get; set; }
     }
 
 

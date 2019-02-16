@@ -37,8 +37,8 @@ namespace IdentityServiceClient.Common.Settings
             Endpoints.Domain = configuration.GetSection("Endpoints").GetSection("Domain").Value;
 
             IdentityService.ApiUrl = configuration.GetSection("IdentityService").GetSection("ApiUrl").Value;
-            IdentityService.ApiKey = configuration.GetSection("IdentityService").GetSection("ApiKey").Value;
-            IdentityService.ForgotPasswordUrl = configuration.GetSection("IdentityService").GetSection("ForgotPasswordUrl").Value;
+            IdentityService.ApiKeyName = configuration.GetSection("IdentityService").GetSection("ApiKeyName").Value;
+            IdentityService.ApiKeyValue = configuration.GetSection("IdentityService").GetSection("ApiKeyValue").Value;
 
             #region Hosting configuration details (if available)
 

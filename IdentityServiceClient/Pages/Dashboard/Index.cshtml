@@ -4,7 +4,7 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
+<div class="col-xl-6 col-lg-6 col-md-6">
     <h1 class="display-4">Dashboard</h1>
-    <p>This is the Identity Service client application</p>
+    <p>Hello <b>@User.FindFirst("fullName").Value!</b></p>
 </div>
