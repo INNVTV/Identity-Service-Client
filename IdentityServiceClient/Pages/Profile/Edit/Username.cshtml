@@ -4,18 +4,38 @@
     ViewData["Title"] = "Change Username";
 }
 
-<h5>Update Username</h5>
+<div class="col-xl-6 col-lg-6 col-md-6">
 
-@if (!String.IsNullOrEmpty(ViewData["Message"].ToString()))
-{
-    <p class="text-danger" style="margin-top:10px; margin-bottom:5px;"><i style="color:orange; margin-right:2px;" class="fas fa-exclamation-triangle"></i> <strong>@ViewData["Message"]</strong></p>
-}
+    <h1 class="display-4">Profile</h1>
 
-<form method="post">
-    <div>
-        <input class="form-control col-xl-4 col-lg-6 col-md-6" asp-for="UserName" />
+    @if (!String.IsNullOrEmpty(ViewData["Message"].ToString()))
+    {
+        <p class="text-danger" style="margin-top:10px; margin-bottom:5px;"><i style="color:orange; margin-right:2px;" class="fas fa-exclamation-triangle"></i> <strong>@ViewData["Message"]</strong></p>
+    }
+
+    <form method="post">
+
+
+        <label style="font-weight:bold" class="control-label">Update Username:</label>
+        @if (!ModelState.IsValid && ModelState["NewUserName"] != null)
+        {
+            <input class="form-control border-danger" style="background-color:#ffed81" asp-for="UserName" placeholder="Username" />
+
+            @foreach (var error in ModelState["NewUserName"].Errors)
+            {
+                <span class="text-danger"><b>@error.ErrorMessage</b></span>
+            }
+            <br />
+        }
+        else
+        {
+            <input class="form-control" asp-for="UserName" placeholder="Username" />
+        }
+
+
         <br />
         <a class="btn btn-sm btn-outline-dark" href="~/profile">Cancel</a> <button class="btn btn-sm btn-dark">Update</button>
-    </div>
-</form>
 
+    </form>
+
+</div>

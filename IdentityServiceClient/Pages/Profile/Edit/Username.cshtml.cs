@@ -30,6 +30,8 @@ namespace IdentityServiceClient.Pages.Profile.Edit
 
         public async Task<IActionResult> OnPost()
         {
+            ViewData["Message"] = String.Empty;
+
             using (var httpClient = new System.Net.Http.HttpClient())
             {
                 httpClient.DefaultRequestHeaders.Add(_applicationSettings.IdentityService.ApiKeyName, _applicationSettings.IdentityService.ApiKeyValue);
@@ -39,9 +41,17 @@ namespace IdentityServiceClient.Pages.Profile.Edit
 
                 if (!result.IsSuccess.Value)
                 {
-                    if(result.ValidationIssues != null)
+                    if (result.ValidationIssues != null)
                     {
-                        ViewData["Message"] = result.ValidationIssues.FirstOrDefault().PropertyFailures.FirstOrDefault();
+                        foreach (var validationProperty in result.ValidationIssues)
+                        {
+                            foreach (var propertyFailure in validationProperty.PropertyFailures)
+                            {
+                                ModelState.AddModelError(validationProperty.PropertyName, propertyFailure);
+                            }
+                        }
+
+                        return Page();
                     }
                     else
                     {
@@ -50,6 +60,8 @@ namespace IdentityServiceClient.Pages.Profile.Edit
 
                     return Page();
                 }
+
+
 
             }
 
