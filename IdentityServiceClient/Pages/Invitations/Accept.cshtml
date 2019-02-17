@@ -19,6 +19,11 @@
     }
     else
     {
+        @if (!String.IsNullOrEmpty(ViewData["Message"].ToString()))
+        {
+            <p class="text-danger" style="margin-top:10px; margin-bottom:5px;"><i style="color:orange; margin-right:2px;" class="fas fa-exclamation-triangle"></i> <strong>@ViewData["Message"]</strong></p>
+        }
+
         <!-- Invitation exists and is not expired. Allow user to create an identity -->
         <p>Please fill out the form below to create your identity</p>
 
