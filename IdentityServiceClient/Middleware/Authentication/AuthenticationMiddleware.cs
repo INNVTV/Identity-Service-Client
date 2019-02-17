@@ -55,6 +55,7 @@ namespace IdentityServiceClient.Middleware.Authentication
             bool validToken = false;
 
             if (   context.Request.Path.Value.ToLower().StartsWith("/login")
+                || context.Request.Path.Value.ToLower().StartsWith("/images")
                 || context.Request.Path.Value.ToLower().StartsWith("/invitations")
                 || context.Request.Path.Value.ToLower().StartsWith("/password")
                 || context.Request.Path.Value.ToLower().StartsWith("/error"))
