@@ -24,6 +24,8 @@ namespace IdentityServiceClient.Pages.Invitations
 
         public async Task<IActionResult> OnGet(string id)
         {
+            ViewData["Message"] = String.Empty;
+
             try
             {
                 using (var httpClient = new System.Net.Http.HttpClient())
@@ -66,6 +68,8 @@ namespace IdentityServiceClient.Pages.Invitations
 
         public async Task<IActionResult> OnPost()
         {
+            ViewData["Message"] = String.Empty;
+
             using (var httpClient = new System.Net.Http.HttpClient())
             {
                 //var invitation = await _mediator.Send(new GetInvitationByIdQuery { Id = id });
@@ -102,6 +106,13 @@ namespace IdentityServiceClient.Pages.Invitations
                 {
                     if (createUserResponse.ValidationIssues != null)
                     {
+                        if(createUserResponse.ValidationIssues.FirstOrDefault().PropertyName.ToLower().Equals("email"))
+                        {
+                            // There is something wrong with the email on file.
+                            // Since we do not have an email field for the user to use to update we display this as a global validation message.
+                            ViewData["Message"] = createUserResponse.ValidationIssues.FirstOrDefault().PropertyFailures.FirstOrDefault();
+                        }
+
                         foreach (var validationProperty in createUserResponse.ValidationIssues)
                         {
                             foreach (var propertyFailure in validationProperty.PropertyFailures)
@@ -111,6 +122,10 @@ namespace IdentityServiceClient.Pages.Invitations
                         }
 
                         return Page();
+                    }
+                    else
+                    {
+                        ViewData["Message"] = createUserResponse.Message;
                     }
 
                     return Page();
