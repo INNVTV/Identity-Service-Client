@@ -55,10 +55,10 @@ namespace IdentityServiceClient.Middleware.Authentication
             bool validToken = false;
 
             if (   context.Request.Path.Value.ToLower().StartsWith("/login")
-                || context.Request.Path.Value.ToLower().StartsWith("/images")
                 || context.Request.Path.Value.ToLower().StartsWith("/invitations")
                 || context.Request.Path.Value.ToLower().StartsWith("/password")
-                || context.Request.Path.Value.ToLower().StartsWith("/error"))
+                || context.Request.Path.Value.ToLower().StartsWith("/error")
+                || context.Request.Path.Value.ToLower().StartsWith("/images/emails/"))
             {
                 // We skip authentication on these paths
                 await next.Invoke(context);
