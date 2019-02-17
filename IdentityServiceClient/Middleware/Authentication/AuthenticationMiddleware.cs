@@ -57,8 +57,7 @@ namespace IdentityServiceClient.Middleware.Authentication
             if (   context.Request.Path.Value.ToLower().StartsWith("/login")
                 || context.Request.Path.Value.ToLower().StartsWith("/invitations")
                 || context.Request.Path.Value.ToLower().StartsWith("/password")
-                || context.Request.Path.Value.ToLower().StartsWith("/error")
-                || context.Request.Path.Value.ToLower().StartsWith("/images/emails/"))
+                || context.Request.Path.Value.ToLower().StartsWith("/error"))
             {
                 // We skip authentication on these paths
                 await next.Invoke(context);
